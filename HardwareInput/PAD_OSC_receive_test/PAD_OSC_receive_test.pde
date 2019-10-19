@@ -4,7 +4,6 @@ import netP5.*;
 OscP5 oscP5;
 NetAddress myRemoteLocation;
 final int port = 1337;
-final String ip = "127.0.0.1";
 
 int P, A, D, Volume, Speed;
 
@@ -13,8 +12,6 @@ void setup() {
   frameRate(1000);
 
   oscP5 = new OscP5(this, port);
-
-  myRemoteLocation = new NetAddress(ip, port);
 }
 
 
@@ -37,6 +34,5 @@ void oscEvent(OscMessage theOscMessage) {
   A = theOscMessage.get(1).intValue();
   D = theOscMessage.get(2).intValue();
   Volume = theOscMessage.get(3).intValue();
-  Speed = theOscMessage.get(4).intValue();
-  
+  Speed = theOscMessage.get(4).intValue(); 
 }
