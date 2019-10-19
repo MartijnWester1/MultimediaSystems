@@ -1,4 +1,11 @@
 import processing.sound.*;
+import oscP5.*;
+import netP5.*;
+
+OscP5 oscP5;
+NetAddress myRemoteLocation;
+final int port = 1337;
+final boolean OSC_Overrules_Control = true;
 
 final float MIN = 0.0001;
 final int sc = 100;//Cube scale
@@ -23,6 +30,8 @@ void setup() {
   size(1270, 680);
   surface.setTitle("MS Audio Mixer");
   surface.setResizable(true);  
+  oscP5 = new OscP5(this, port);
+  
   Sound = loadImage("AudioG.png");
   NoSound = loadImage("NoAudioG.png");
   
@@ -170,6 +179,17 @@ void handleSoundPointer() {
   //Draw desired pointer position
   ellipse(map2X(4*P_Slider.GetValue(),4*D_Slider.GetValue()), map2Y(4*A_Slider.GetValue(),4*D_Slider.GetValue()), 15, 15);
   translate(-60, -60);
+}
+
+
+void oscEvent(OscMessage theOscMessage) {
+  if (OSC_Overrules_Control) {
+    P_Slider.SetValue(map(theOscMessage.get(0).intValue(),0,1024,P_Slider.min,P_Slider.max));
+    A_Slider.SetValue(map(theOscMessage.get(1).intValue(),0,1024,A_Slider.min,A_Slider.max));
+    D_Slider.SetValue(map(theOscMessage.get(2).intValue(),0,1024,D_Slider.min,D_Slider.max));
+    VolSlider.SetValue(map(theOscMessage.get(3).intValue(),0,1024,VolSlider.min,VolSlider.max));
+    EaseSlider.SetValue(map(theOscMessage.get(4).intValue(),0,1024,EaseSlider.min,EaseSlider.max));
+  }
 }
 
 
