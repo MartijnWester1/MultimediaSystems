@@ -25,8 +25,8 @@ int cv_Width = 720, cv_Height = 620;
 Slider P_Slider, A_Slider, D_Slider, EaseSlider, VolSlider;
 Slider[] Sliders = new Slider[5];
 
-final boolean RemoteControl = false;
-final boolean LoadAudio = false;
+final boolean RemoteControl = true;
+final boolean LoadAudio = true;
 float ScrollSpeed = .1;//Amount / scroll steps
 PImage Sound, NoSound;
 PFont myFont;
@@ -65,13 +65,13 @@ void setup() {
     for (int p = 0; p < 5; p++)
       for (int a = 0; a < 5; a++)
         for (int d = 0; d < 5; d++)
-          loadSound("..\\..\\..\\First Prototype\\PAD\\data\\mix0" + a + "" + d + ".wav", p, a, d);
+          loadSound("Sounds\\mix" + p + "" + a + "" + d + ".wav", p, a, d);
       
   P_Slider = new Slider(770, 220, 40, 360, 0f, 0f, 1f); P_Slider.Label = "P";
   A_Slider = new Slider(870, 220, 40, 360, 0f, 0f, 1f); A_Slider.Label = "A";
   D_Slider = new Slider(970, 220, 40, 360, 0f, 0f, 1f); D_Slider.Label = "D";
   VolSlider = new Slider(1100, 60, 40, 220, 0f, 0f, 1f);  
-  EaseSlider = new Slider(1170, 60, 40, 220, POINTER_SPEED, .01f, .1f);
+  EaseSlider = new Slider(1170, 60, 40, 220, POINTER_SPEED, .005f, .05f);
   
   Sliders[0] = P_Slider;
   Sliders[1] = A_Slider;
@@ -176,9 +176,9 @@ void calcVolumes(){
       dy = min(listenPos.y, 4f) - (s.vec.y);
       dz = min(listenPos.z, 4f) - (s.vec.z);
       dist = sqrt(dx * dx + dy * dy + dz * dz);
-      if (dist>4) continue;
+      if (dist>1.5) continue;
       
-      float ratio = map(dist, 0, 4, 1, 0);
+      float ratio = map(dist, 0, 1.5, 1, 0);
       s.setVolume(ratio);
       if (s.vec.x==4 || s.vec.y==0 || s.vec.z==0){
         float radius = pow(ratio, 0.65) * 42;
@@ -221,8 +221,8 @@ void handleSoundPointer() {
   noStroke();  
   ellipse(screenX, screenY, 15, 15);//Draw sound pointer dot
   strokeWeight(1);
-  stroke(255, 25, 25, 90);
-  fill(255, 25, 25, 55);
+  stroke(255, 25, 25, 130);
+  fill(255, 25, 25, 105);
   //Draw desired pointer position
   ellipse(map2X(4*P_Slider.GetValue(),4*D_Slider.GetValue()), map2Y(4*A_Slider.GetValue(),4*D_Slider.GetValue()), 15, 15);
   translate(-60, -60);
