@@ -4,15 +4,15 @@
 #include <OSCMessage.h>
 
 /*  Wifi configs  */
-char ssid[] = "Dollard_2.4GHz";
-char pass[] = "ik54j3s94rgq";
+char ssid[] = "wlan 3";
+char pass[] = "liacs_8_";
 
 /*  OSC configs  */
 WiFiUDP Udp;                                // A UDP instance to let us send and receive packets over UDP
-const IPAddress outIp(192, 168, 1, 14); // remote IP of your computer
+const IPAddress outIp(132, 229, 130, 148); // remote IP of your computer
+//const IPAddress outIp(132, 229, 130, 39); // remote IP of your computer
 const unsigned int outPort = 1337;          // remote port to receive OSC
 const unsigned int localPort = 8888;        // local port to listen for OSC packets (actually not used for sending)
-String pleasure = "/pleasure";
 
 /*  Multiplexer configs  */
 const int analogInputPin = A0;
@@ -89,7 +89,7 @@ void loop() {
   D = readData(2);
   Volume = readData(3);
   Speed = readData(4);
-  OSCMessage msg("/pleasure");
+  OSCMessage msg("/pad");
   msg.add(P);
   msg.add(A);
   msg.add(D);
