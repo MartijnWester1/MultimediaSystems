@@ -65,7 +65,7 @@ void setup() {
     for (int p = 0; p < 5; p++)
       for (int a = 0; a < 5; a++)
         for (int d = 0; d < 5; d++)
-          loadSound("Sounds\\mix" + p + "" + a + "" + d + ".wav", p, a, d);
+          loadSound("Sounds//mix" + p + "" + a + "" + d + ".wav", p, a, d);
       
   P_Slider = new Slider(770, 220, 40, 360, 0f, 0f, 1f); P_Slider.Label = "P";
   A_Slider = new Slider(870, 220, 40, 360, 0f, 0f, 1f); A_Slider.Label = "A";
