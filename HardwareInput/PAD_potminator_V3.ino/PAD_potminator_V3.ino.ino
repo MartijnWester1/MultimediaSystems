@@ -4,13 +4,12 @@
 #include <OSCMessage.h>
 
 /*  Wifi configs  */
-char ssid[] = "wlan 3";
-char pass[] = "liacs_8_";
+char ssid[] = "interwebs";
+char pass[] = "Wachtwoord";
 
 /*  OSC configs  */
 WiFiUDP Udp;                                // A UDP instance to let us send and receive packets over UDP
-const IPAddress outIp(132, 229, 130, 148); // remote IP of your computer
-//const IPAddress outIp(132, 229, 130, 39); // remote IP of your computer
+const IPAddress outIp(192,168,43,75); // remote IP of your computer
 const unsigned int outPort = 1337;          // remote port to receive OSC
 const unsigned int localPort = 8888;        // local port to listen for OSC packets (actually not used for sending)
 
